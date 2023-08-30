@@ -1,0 +1,13 @@
+{
+  "name": "backend-todo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.48.0"
+  }
+}
