@@ -1,3 +1,4 @@
+import { pipeValidation } from './middlewares/pipe-validation.js';
 import { completeTask, createNewTask, deleteTask, getAllTasks, updateTask } from './service/tasks.js';
 import { buildRoutePath } from './utils/build-route-path.js';
 
@@ -15,7 +16,9 @@ export const routes = [
   {
     method: 'PUT',
     path: buildRoutePath('/tasks/:id'),
-    handler: (req, res) => updateTask(req, res),
+    handler: (req, res) => {
+      pipeValidation(req, res, () => updateTask(req, res));
+    },
   },
   {
     method: 'PATCH',
