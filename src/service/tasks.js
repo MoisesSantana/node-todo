@@ -40,7 +40,18 @@ export function updateTask(req, res) {
 }
 
 export function completeTask(req, res) {
-  return res.end('path: ' + req.url + ' method: ' + req.method);
+  const { id } = req.params;
+
+  const updatedTask = {
+    completedAt: dateFormatter.format(new Date()),
+  };
+
+  const response = database.update('tasks', id, updatedTask);
+  if (!response) {
+    return res.writeHeader(404).end(JSON.stringify('Task not found'));
+  }
+
+  return res.end(JSON.stringify(response));
 }
 
 export function deleteTask(req, res) {
