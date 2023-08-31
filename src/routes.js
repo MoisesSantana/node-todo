@@ -11,7 +11,9 @@ export const routes = [
   {
     method: 'POST',
     path: buildRoutePath('/tasks'),
-    handler: (req, res) => createNewTask(req, res),
+    handler: (req, res) => {
+      pipeValidation(req, res, () => createNewTask(req, res));
+    },
   },
   {
     method: 'PUT',
@@ -30,6 +32,5 @@ export const routes = [
     method: 'DELETE',
     path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => deleteTask(req, res),
-
   },
 ];
