@@ -44,5 +44,12 @@ export function completeTask(req, res) {
 }
 
 export function deleteTask(req, res) {
-  return res.end('path: ' + req.url + ' method: ' + req.method);
+  const { id } = req.params;
+
+  const response = database.delete('tasks', id);
+  if (!response) {
+    return res.writeHeader(404).end(JSON.stringify('Task not found'));
+  }
+
+  return res.writeHeader(204).end();
 }
