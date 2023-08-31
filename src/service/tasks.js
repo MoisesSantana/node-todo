@@ -4,8 +4,10 @@ import { Database } from '../database.js';
 
 const database = new Database();
 
-export function getAllTasks(req, res) {
-  return res.end('path: ' + req.url + ' method: ' + req.method);
+export function getAllTasks(_req, res) {
+  const tasks = database.select('tasks');
+
+  return res.end(JSON.stringify(tasks));
 }
 
 export function createNewTask(req, res) {
