@@ -11,13 +11,11 @@ export const routes = [
     method: 'POST',
     path: buildRoutePath('/tasks'),
     handler: (req, res) => createNewTask(req, res),
-
   },
   {
     method: 'PUT',
     path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => updateTask(req, res),
-
   },
   {
     method: 'PATCH',

@@ -1,9 +1,24 @@
+import { randomUUID } from 'node:crypto';
+import { dateFormatter } from '../utils/formatter.js';
+import { Database } from '../database.js';
+
+const database = new Database();
+
 export function getAllTasks(req, res) {
   return res.end('path: ' + req.url + ' method: ' + req.method);
 }
 
 export function createNewTask(req, res) {
-  return res.end('path: ' + req.url + ' method: ' + req.method);
+  const task = {
+    id: randomUUID(),
+    ...req.body,
+    createdAt: dateFormatter.format(new Date()),
+    updatedAt: dateFormatter.format(new Date()),
+    completedAt: null,
+  };
+
+  database.insert('tasks', task);
+  return res.writeHeader(201).end(JSON.stringify(task));
 }
 
 export function updateTask(req, res) {
